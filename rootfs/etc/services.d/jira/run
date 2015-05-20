@@ -1,0 +1,9 @@
+#!/usr/bin/execlineb -P
+
+with-contenv
+s6-setuidgid jira
+trap -x
+{
+  term { /opt/jira/bin/stop-jira.sh }
+}
+/opt/jira/bin/start-jira.sh -fg

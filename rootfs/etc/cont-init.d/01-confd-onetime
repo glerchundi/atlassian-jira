@@ -1,0 +1,11 @@
+#!/usr/bin/execlineb -P
+with-contenv
+s6-envuidgid jira
+multisubstitute
+{
+  import -u -D"/jira" CONFD_PREFIX
+  import -u -D"env" CONFD_BACKEND
+  import -u -D0 UID
+  import -u -D0 GID
+}
+confd --onetime --prefix="${CONFD_PREFIX}" --tmpl-uid="${UID}" --tmpl-gid="${GID}" --tmpl-src="/etc/jira/dbconfig.xml.tmpl" --tmpl-dest="/var/lib/jira/dbconfig.xml" ${CONFD_BACKEND}
