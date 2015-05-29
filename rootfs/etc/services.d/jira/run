@@ -1,7 +1,10 @@
 #!/usr/bin/execlineb -P
 
+cd /opt/jira
+
 with-contenv
 s6-setuidgid jira
+foreground { s6-rmrf /var/lib/jira/.jira-home.lock }
 trap -x
 {
   term { /opt/jira/bin/stop-jira.sh }

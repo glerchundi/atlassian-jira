@@ -6,7 +6,6 @@
   <database-type>mysql</database-type>
   <jdbc-datasource>
     <url>{{if exists "/url"}}{{getv "/url"}}{{end}}</url>
-    <!--url>jdbc:mysql://172.17.0.47:3307/jira?useUnicode=true&amp;characterEncoding=UTF8&amp;sessionVariables=storage_engine=InnoDB</url-->
     <driver-class>{{if exists "/driver"}}{{getv "/driver"}}{{end}}</driver-class>
     <username>{{if exists "/user"}}{{getv "/user"}}{{end}}</username>
     <password>{{if exists "/password"}}{{getv "/password"}}{{end}}</password>
