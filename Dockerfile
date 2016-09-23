@@ -1,4 +1,4 @@
-FROM quay.io/justcontainers/base:v0.7.2
+FROM quay.io/justcontainers/base:v0.14.0
 MAINTAINER Gorka Lerchundi Osa <glertxundi@gmail.com>
 
 ##
@@ -21,14 +21,14 @@ RUN apt-get-min update                         && \
 RUN useradd -r --create-home --home-dir /opt/jira --shell /bin/false jira
 
 # atlassian jira
-ADD https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-6.4.4.tar.gz /tmp/atlassian-jira.tar.gz
+ADD https://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-software-7.2.1.tar.gz /tmp/atlassian-jira.tar.gz
 RUN tar xvfz /tmp/atlassian-jira.tar.gz -C /opt/jira --strip 1 --owner jira --group jira && \
     echo "jira.home = ${JIRA_HOME}" > /opt/jira/atlassian-jira/WEB-INF/classes/jira-application.properties && \
     chown -R jira:jira /opt/jira
 
 # mysql connector
-ADD http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.35.tar.gz /tmp/mysql-connector.tar.gz
-RUN tar xvfz /tmp/mysql-connector.tar.gz -C /opt/jira/lib --strip 1 --wildcards --no-anchored 'mysql-connector-java-5.1.35-bin.jar'
+ADD http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.39.tar.gz /tmp/mysql-connector.tar.gz
+RUN tar xvfz /tmp/mysql-connector.tar.gz -C /opt/jira/lib --strip 1 --wildcards --no-anchored 'mysql-connector-java-5.1.39-bin.jar'
 
 # confd
 ADD https://github.com/glerchundi/confd/releases/download/v0.10.0-beta2/confd-0.10.0-beta2-linux-amd64 /usr/bin/confd
